@@ -1,5 +1,18 @@
 version: '3'
 services:
+  desafiodepropostas:
+    image: desafiodepropostas
+    ports:
+    - 8083:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/keycloak
+      SPRING_DATASOURCE_USERNAME: "keycloak"
+      SPRING_DATASOURCE_PASSWORD: "password"
+    build:
+      context: "./"
+      dockerfile: "Dockerfile"
+    depends_on:
+      - postgres
 
   zookeeper:
     image: "confluentinc/cp-zookeeper:5.2.1"
@@ -25,7 +38,7 @@ services:
   postgres:
     image: 'postgres:alpine'
     volumes:
-      - postgres-volume:/var/lib/postgresql/data
+      - postgres-volume:/var/lib/postgres/data
     ports:
       - 5432:5432
     environment:
