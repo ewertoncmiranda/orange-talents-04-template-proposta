@@ -1,5 +1,6 @@
 package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
 
+import br.miranda.zup.proposta.desafioDeProposta.validacao.DocumentoUnicoPorProposta;
 import br.miranda.zup.proposta.desafioDeProposta.validacao.ValidaCpfOuCnpj;
 
 import javax.validation.constraints.Email;
@@ -23,7 +24,8 @@ public class NovaPropostaRequester {
         this.salario = salario;
     }
 
-    private @ValidaCpfOuCnpj @NotBlank String documento ;
+    private @ValidaCpfOuCnpj @DocumentoUnicoPorProposta
+    @NotBlank String documento ;
 
     private @Email @NotBlank String email ;
 
