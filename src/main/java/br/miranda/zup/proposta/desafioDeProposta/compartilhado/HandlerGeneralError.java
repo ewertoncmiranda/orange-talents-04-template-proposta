@@ -1,5 +1,6 @@
 package br.miranda.zup.proposta.desafioDeProposta.compartilhado;
 
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -31,6 +32,13 @@ public class HandlerGeneralError {
         });
         return listaDeErros;
     }
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handlerFeignServerException(FeignException.FeignServerException exception){
+        return  new ErrorResponse(exception.getMessage(),exception.getCause().toString());
+    }
 
-
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handlerFeignClienteException(FeignException.FeignClientException exception){
+       return  new ErrorResponse(exception.getMessage(),exception.getCause().toString());
+    }
 }

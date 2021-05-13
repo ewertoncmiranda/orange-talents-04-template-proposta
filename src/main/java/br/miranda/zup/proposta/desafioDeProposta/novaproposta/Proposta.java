@@ -2,10 +2,7 @@ package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
 
 import br.miranda.zup.proposta.desafioDeProposta.validacao.ValidaCpfOuCnpj;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,11 +15,13 @@ public class Proposta {
     public Proposta(@NotBlank @ValidaCpfOuCnpj String documento,
                     @NotBlank @Email String email,
                     @NotBlank String endereco,
-                    @Positive @NotBlank BigDecimal salario) {
+                    @Positive @NotBlank BigDecimal salario,
+                    @NotNull String nome) {
         this.documento = documento;
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
+        this.nome = nome ;
     }
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id ;
@@ -35,6 +34,16 @@ public class Proposta {
 
     private @Positive BigDecimal salario;
 
+
+    private @NotNull String nome ;
+
+    public void setStatusProposta(StatusProposta statusProposta) {
+        this.statusProposta = statusProposta;
+    }
+
+    @Enumerated(EnumType.STRING)
+    private StatusProposta statusProposta;
+
     public String getDocumento() {
         return documento;
     }
@@ -42,6 +51,8 @@ public class Proposta {
     public String getEmail() {
         return email;
     }
+
+    public String getNome() {    return nome;    }
 
     public String getEndereco() {
         return endereco;
@@ -54,6 +65,9 @@ public class Proposta {
         return id;
     }
 
+    public StatusProposta getStatusProposta() {
+        return statusProposta;
+    }
     @Override
     public String toString() {
         return "NovaPropostaRequester{" +

@@ -17,14 +17,16 @@ public class NovaPropostaRequester {
     public NovaPropostaRequester(@NotBlank @ValidaCpfOuCnpj String documento,
                                  @NotBlank @Email String email,
                                  @NotBlank String endereco,
-                                 @Positive @NotBlank BigDecimal salario) {
+                                 @Positive @NotBlank BigDecimal salario,
+                                 @NotBlank String nome ) {
         this.documento = documento;
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
+        this.nome = nome ;
     }
 
-    private @ValidaCpfOuCnpj @DocumentoUnicoPorProposta
+    private @ValidaCpfOuCnpj //@DocumentoUnicoPorProposta
     @NotBlank String documento ;
 
     private @Email @NotBlank String email ;
@@ -32,6 +34,8 @@ public class NovaPropostaRequester {
     private @NotBlank String endereco ;
 
     private @Positive BigDecimal salario;
+
+    private @NotBlank String nome ;
 
     public String getDocumento() {
         return documento;
@@ -45,6 +49,9 @@ public class NovaPropostaRequester {
         return endereco;
     }
 
+    public String getNome() {return nome;   }
+
+
     public BigDecimal getSalario() {
         return salario;
     }
@@ -56,10 +63,11 @@ public class NovaPropostaRequester {
                 ", email='" + email + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", salario=" + salario +
+                ", nome='" + nome + '\'' +
                 '}';
     }
 
     public Proposta toModel() {
-      return new Proposta(documento ,email,endereco,salario);
+      return new Proposta(documento ,email,endereco,salario,nome);
     }
 }
