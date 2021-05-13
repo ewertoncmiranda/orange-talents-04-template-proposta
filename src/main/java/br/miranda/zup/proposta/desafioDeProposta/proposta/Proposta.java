@@ -1,5 +1,6 @@
-package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
+package br.miranda.zup.proposta.desafioDeProposta.proposta;
 
+import br.miranda.zup.proposta.desafioDeProposta.proposta.StatusProposta;
 import br.miranda.zup.proposta.desafioDeProposta.validacao.ValidaCpfOuCnpj;
 
 import javax.persistence.*;
@@ -11,6 +12,8 @@ import java.math.BigDecimal;
 
 @Entity
 public class Proposta {
+
+    public Proposta(){};
 
     public Proposta(@NotBlank @ValidaCpfOuCnpj String documento,
                     @NotBlank @Email String email,

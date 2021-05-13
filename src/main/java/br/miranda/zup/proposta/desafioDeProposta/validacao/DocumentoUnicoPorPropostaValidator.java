@@ -1,13 +1,12 @@
 package br.miranda.zup.proposta.desafioDeProposta.validacao;
 
-import br.miranda.zup.proposta.desafioDeProposta.novaproposta.Proposta;
+import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.annotation.Annotation;
 
 public class DocumentoUnicoPorPropostaValidator implements ConstraintValidator<DocumentoUnicoPorProposta ,Object> {
     @PersistenceContext

@@ -1,7 +1,7 @@
 package br.miranda.zup.proposta.desafioDeProposta.analise;
 
-import br.miranda.zup.proposta.desafioDeProposta.novaproposta.Proposta;
-import br.miranda.zup.proposta.desafioDeProposta.novaproposta.StatusProposta;
+import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
+import br.miranda.zup.proposta.desafioDeProposta.proposta.StatusProposta;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EnumType;

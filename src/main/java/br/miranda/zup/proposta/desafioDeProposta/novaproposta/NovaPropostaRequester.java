@@ -1,11 +1,11 @@
 package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
 
+import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.validacao.DocumentoUnicoPorProposta;
 import br.miranda.zup.proposta.desafioDeProposta.validacao.ValidaCpfOuCnpj;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
@@ -26,7 +26,7 @@ public class NovaPropostaRequester {
         this.nome = nome ;
     }
 
-    private @ValidaCpfOuCnpj //@DocumentoUnicoPorProposta
+    private @ValidaCpfOuCnpj @DocumentoUnicoPorProposta
     @NotBlank String documento ;
 
     private @Email @NotBlank String email ;

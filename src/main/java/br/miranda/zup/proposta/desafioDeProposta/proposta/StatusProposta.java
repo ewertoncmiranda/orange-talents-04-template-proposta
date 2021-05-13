@@ -1,4 +1,4 @@
-package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
+package br.miranda.zup.proposta.desafioDeProposta.proposta;
 
 public enum StatusProposta {
     NAO_ELEGIVEL ,
