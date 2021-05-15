@@ -2,16 +2,15 @@ package br.miranda.zup.proposta.desafioDeProposta.analise;
 
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 
-public class SolicitacaoRequest {
+public class SolicitacaoAnaliseRequest {
 
-    public SolicitacaoRequest() {
+    public SolicitacaoAnaliseRequest() {
     }
-
     private String documento ;
     private String nome ;
     private String idProposta;
 
-    public SolicitacaoRequest(Proposta requester){
+    public SolicitacaoAnaliseRequest(Proposta requester){
        this.documento = requester.getDocumento();
        this.nome = requester.getNome();
        this.idProposta = requester.getId().toString();

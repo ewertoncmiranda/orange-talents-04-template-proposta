@@ -32,13 +32,22 @@ public class HandlerGeneralError {
         });
         return listaDeErros;
     }
+
+    @ExceptionHandler(FeignException.FeignServerException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handlerFeignServerException(FeignException.FeignServerException exception){
-        return  new ErrorResponse(exception.getMessage(),exception.getCause().toString());
+      return  new ErrorResponse(exception.getMessage(),exception.getCause().toString());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(FeignException.FeignClientException.class)
     public ErrorResponse handlerFeignClienteException(FeignException.FeignClientException exception){
+      return  new ErrorResponse(exception.getMessage(),exception.getCause().toString());
+    }
+
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(FeignException.UnprocessableEntity.class)
+    public ErrorResponse handlerFeignClienteRException(FeignException.UnprocessableEntity exception) {
        return  new ErrorResponse(exception.getMessage(),exception.getCause().toString());
     }
 }

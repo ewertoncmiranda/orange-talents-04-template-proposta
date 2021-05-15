@@ -1,10 +1,15 @@
 package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
 
-import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitaAnaliseFeign;
-import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoRequest;
-import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoResponse;
+import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitaAnalisePropostaClient;
+import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseRequest;
+import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseReponse;
+import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoResponse;
+import br.miranda.zup.proposta.desafioDeProposta.atrelacartao.NovoCartaoRequester;
+import br.miranda.zup.proposta.desafioDeProposta.atrelacartao.SolicitaCartaoClient;
+import br.miranda.zup.proposta.desafioDeProposta.enumeration.StatusProposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.PropostaRepositorio;
+import feign.FeignException.UnprocessableEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RequestMapping("/proposta")
 @RestController
@@ -22,29 +28,50 @@ public class NovaPropostaController {
     @Autowired
     private PropostaRepositorio repositorio ;
 
+    @Autowired
+    private SolicitaCartaoClient solicitaCartaoClient;
+
     @PersistenceContext
     private EntityManager em ;
 
     @Autowired
-    private SolicitaAnaliseFeign analise ;
+    private SolicitaAnalisePropostaClient analiseClient ;
 
     @PostMapping
-    public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester , UriComponentsBuilder uri) {
-
+    public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester   , UriComponentsBuilder uri) {
         Proposta proposta = propostaRequester.toModel() ;
+        repositorio.save(proposta) ;
 
-        proposta = repositorio.save(proposta) ;
-
-        SolicitacaoRequest solicitacaoRequest = new SolicitacaoRequest(proposta);
-
-        ResponseEntity responseEntity = analise.busca(solicitacaoRequest);
-
-        SolicitacaoResponse solicitacaoResponse = (SolicitacaoResponse) responseEntity.getBody();
-
-        repositorio.save(solicitacaoResponse.toModel(em));
-
-        URI returnUri = uri.path("/proposta/{id}").build(repositorio.save(proposta).getId());
+        URI returnUri = uri.path("/proposta/{id}").build(repositorio.save(analisaProposta(proposta)).getId());
         return ResponseEntity.created(returnUri).build();
+    }
+
+    public Proposta analisaProposta(Proposta proposta){
+        try {
+            SolicitacaoAnaliseRequest solicitacaoAnaliseRequest = new SolicitacaoAnaliseRequest(proposta);
+
+            SolicitacaoAnaliseReponse resultadoDaConsulta = analiseClient.busca(solicitacaoAnaliseRequest);
+
+            StatusProposta statusProposta = resultadoDaConsulta.getResultadoSolicitacao().getStatusProposta();
+
+            proposta.setStatusProposta(statusProposta);
+            return proposta ;
+
+        } catch (UnprocessableEntity e){
+            proposta.setStatusProposta(StatusProposta.NAO_ELEGIVEL);
+            return proposta;
+        }
+    }
+        /*
+    @GetMapping
+    public List<Proposta> teste2(){
+       return  repositorio.buscarPropostas();
+    }
+*/
+    //@GetMapping
+    public CartaoResponse teste(){
+        NovoCartaoRequester req = new NovoCartaoRequester("" ,"" ,1L);
+        return solicitaCartaoClient.solicita(req);
     }
 
 }

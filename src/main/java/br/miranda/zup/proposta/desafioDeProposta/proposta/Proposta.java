@@ -1,6 +1,7 @@
 package br.miranda.zup.proposta.desafioDeProposta.proposta;
 
-import br.miranda.zup.proposta.desafioDeProposta.proposta.StatusProposta;
+import br.miranda.zup.proposta.desafioDeProposta.enumeration.StatusProposta;
+import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.validacao.ValidaCpfOuCnpj;
 
 import javax.persistence.*;
@@ -37,6 +38,9 @@ public class Proposta {
 
     private @Positive BigDecimal salario;
 
+   @OneToOne
+   @JoinColumn(name = "cartao_id")
+   private Cartao cartao;
 
     private @NotNull String nome ;
 
@@ -61,9 +65,11 @@ public class Proposta {
         return endereco;
     }
 
+
     public BigDecimal getSalario() {
         return salario;
     }
+
     public Long getId() {
         return id;
     }
@@ -71,6 +77,9 @@ public class Proposta {
     public StatusProposta getStatusProposta() {
         return statusProposta;
     }
+
+    public void setCartao(Cartao cartao) { this.cartao = cartao;   }
+
     @Override
     public String toString() {
         return "NovaPropostaRequester{" +

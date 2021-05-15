@@ -1,31 +1,24 @@
 package br.miranda.zup.proposta.desafioDeProposta.analise;
 
+import br.miranda.zup.proposta.desafioDeProposta.enumeration.StatusAnalise;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
-import br.miranda.zup.proposta.desafioDeProposta.proposta.StatusProposta;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-public class SolicitacaoResponse {
+public class SolicitacaoAnaliseReponse {
 
-    public SolicitacaoResponse() {
+    public SolicitacaoAnaliseReponse() {
     }
     private String documento ;
     private String nome ;
     private String idProposta;
 
     @Enumerated(EnumType.STRING)
-    private StatusProposta resultadoSolicitacao ;
+    private StatusAnalise resultadoSolicitacao ;
 
-    public SolicitacaoResponse(String documento, String nome, String idProposta, StatusProposta resultadoSolicitacao) {
-        this.documento = documento;
-        this.nome = nome;
-        this.idProposta = idProposta;
-        this.resultadoSolicitacao = resultadoSolicitacao;
-    }
-
-    public StatusProposta getResultadoSolicitacao() { return resultadoSolicitacao;  }
+    public StatusAnalise getResultadoSolicitacao() { return resultadoSolicitacao;  }
 
     public String getDocumento() {
         return documento;
@@ -41,7 +34,7 @@ public class SolicitacaoResponse {
 
     public Proposta toModel(EntityManager em) {
         Proposta proposta = em.find(Proposta.class , Long.parseLong(this.getIdProposta()));
-        proposta.setStatusProposta(getResultadoSolicitacao());
+        //proposta.setStatusProposta(getResultadoSolicitacao());
         return proposta;
     }
 }
