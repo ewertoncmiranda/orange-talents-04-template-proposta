@@ -1,4 +1,4 @@
 FROM openjdk:11
-ADD target/desafiodepropostas.jar aplication.jar
+ADD target/desafiodepropostas.jar aplicattion.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar" , "aplication.jar"]
+ENTRYPOINT ["java", "-jar" , "aplicattion.jar"]

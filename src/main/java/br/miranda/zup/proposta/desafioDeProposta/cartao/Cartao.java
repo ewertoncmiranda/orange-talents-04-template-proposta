@@ -1,11 +1,13 @@
 package br.miranda.zup.proposta.desafioDeProposta.cartao;
 
-import br.miranda.zup.proposta.desafioDeProposta.persistencia.PersonalEntityManager;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -28,21 +30,24 @@ public class Cartao {
 
 
     public Cartao(String id, String emitidoEm, String titular,String limite ,Proposta proposta) {
-        this.numeroDoCartao = id;
+        this.numeroDoCartao = criptografaCartao(id);
         this.titular = titular;
         this.limite = new BigDecimal(limite);
-        PersonalEntityManager pem =new PersonalEntityManager();
         this.proposta = proposta;
-
     }
 
-
-    public Cartao(Long id, String emitidoEm, String titular) {
-        this.id = id;
-        this.emitidoEm = emitidoEm;
-        this.titular = titular;
+    private String criptografaCartao( String numeroDoCartao){
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-384");
+            messageDigest.update(numeroDoCartao.getBytes(),0,numeroDoCartao.length());
+            byte[] digest =  messageDigest.digest();
+            numeroDoCartao = new BigInteger(1,digest).toString(16);
+            return numeroDoCartao;
+        }catch (NoSuchAlgorithmException e){
+           e.printStackTrace();
+        }
+        return "ERRO NA CRIPTOGRAFIA DO CARTAO" ;
     }
-
     public Long getId() {
         return id;
     }

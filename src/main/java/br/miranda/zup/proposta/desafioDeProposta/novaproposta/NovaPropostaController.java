@@ -52,9 +52,7 @@ public class NovaPropostaController {
 
             SolicitacaoAnaliseReponse resultadoDaConsulta = analiseClient.busca(solicitacaoAnaliseRequest);
 
-            StatusProposta statusProposta = resultadoDaConsulta.getResultadoSolicitacao().getStatusProposta();
-
-            proposta.setStatusProposta(statusProposta);
+            proposta.setStatusProposta(resultadoDaConsulta.getResultadoSolicitacao().getStatusProposta());
             return proposta ;
 
         } catch (UnprocessableEntity e){
@@ -62,16 +60,6 @@ public class NovaPropostaController {
             return proposta;
         }
     }
-        /*
-    @GetMapping
-    public List<Proposta> teste2(){
-       return  repositorio.buscarPropostas();
-    }
-*/
-    //@GetMapping
-    public CartaoResponse teste(){
-        NovoCartaoRequester req = new NovoCartaoRequester("" ,"" ,1L);
-        return solicitaCartaoClient.solicita(req);
-    }
+
 
 }

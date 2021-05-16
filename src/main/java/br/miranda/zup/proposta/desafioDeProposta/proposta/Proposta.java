@@ -30,27 +30,22 @@ public class Proposta {
     }
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id ;
-
     private @ValidaCpfOuCnpj @NotBlank String documento ;
-
     private @Email @NotBlank String email ;
-
     private @NotBlank String endereco ;
-
-    private @Positive BigDecimal salario;
-
-   @OneToOne
-   @JoinColumn(name = "cartao_id")
-   private Cartao cartao;
-
     private @NotNull String nome ;
+    private @Positive BigDecimal salario;
+    @Enumerated(EnumType.STRING)
+    private StatusProposta statusProposta;
+
+    @OneToOne
+    @JoinColumn(name = "cartao_id")
+    private Cartao cartao;
 
     public void setStatusProposta(StatusProposta statusProposta) {
         this.statusProposta = statusProposta;
     }
-
-    @Enumerated(EnumType.STRING)
-    private StatusProposta statusProposta;
+;
 
     public String getDocumento() {
         return documento;
@@ -65,7 +60,6 @@ public class Proposta {
     public String getEndereco() {
         return endereco;
     }
-
 
     public BigDecimal getSalario() {
         return salario;

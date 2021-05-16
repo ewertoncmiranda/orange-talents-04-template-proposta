@@ -5,7 +5,7 @@ import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoRepositorio;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoResponse;
 import br.miranda.zup.proposta.desafioDeProposta.enumeration.StatusProposta;
-import br.miranda.zup.proposta.desafioDeProposta.persistencia.PersonalEntityManager;
+
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.PropostaRepositorio;
 import org.slf4j.Logger;
