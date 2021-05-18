@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
@@ -37,6 +38,7 @@ public class NovaPropostaController {
     @Autowired
     private SolicitaAnalisePropostaClient analiseClient ;
 
+    @RolesAllowed({"user-admin" ,"user-basic"})
     @PostMapping
     public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester   , UriComponentsBuilder uri) {
         Proposta proposta = propostaRequester.toModel() ;
