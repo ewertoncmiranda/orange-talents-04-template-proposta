@@ -1,4 +1,4 @@
-package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
+package br.miranda.zup.proposta.desafioDeProposta.proposta;
 
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.PropostaRepositorio;

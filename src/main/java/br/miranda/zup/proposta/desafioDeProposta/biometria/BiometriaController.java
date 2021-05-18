@@ -23,7 +23,7 @@ public class BiometriaController {
     @PersistenceContext
     EntityManager em ;
 
-    @GetMapping("/cartao/{idCartao}")
+    @PostMapping("/cartao/{idCartao}")
     @Transactional
     public ResponseEntity cadastrarBiometria(@PathVariable Long idCartao , @RequestBody @Valid NovaBiometriaRequester requester, UriComponentsBuilder uriBuilder){
         Cartao cartao = em.find(Cartao.class , idCartao);

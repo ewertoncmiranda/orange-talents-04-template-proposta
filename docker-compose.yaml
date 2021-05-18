@@ -13,6 +13,8 @@ services:
       dockerfile: "Dockerfile"
     depends_on:
       - postgres
+      - analise
+      - contas
 
   zookeeper:
     image: "confluentinc/cp-zookeeper:5.2.1"
@@ -36,7 +38,7 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
 
   postgres:
-    image: 'postgres:alpine'
+    image: 'postgres:12'
     volumes:
       - postgres-volume:/var/lib/postgres/data
     ports:
@@ -49,6 +51,7 @@ services:
 
   keycloak:
     image: jboss/keycloak
+
     ports:
       - 18443:8443
       - 18080:8080
@@ -77,6 +80,7 @@ services:
 
   analise:
     image: 'zupacademy/analise-financeira'
+
     ports:
       - 9999:9999
     environment:

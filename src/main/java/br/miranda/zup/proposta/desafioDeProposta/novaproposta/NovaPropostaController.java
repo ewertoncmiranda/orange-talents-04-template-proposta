@@ -41,8 +41,10 @@ public class NovaPropostaController {
     public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester   , UriComponentsBuilder uri) {
         Proposta proposta = propostaRequester.toModel() ;
         repositorio.save(proposta) ;
+        Proposta props = analisaProposta(proposta);
+        Long id = repositorio.save(props).getId() ;
 
-        URI returnUri = uri.path("/proposta/{id}").build(repositorio.save(analisaProposta(proposta)).getId());
+        URI returnUri = uri.path("/proposta/{id}").build(id);
         return ResponseEntity.created(returnUri).build();
     }
 
