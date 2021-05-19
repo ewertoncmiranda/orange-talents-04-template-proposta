@@ -11,6 +11,7 @@ import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.PropostaRepositorio;
 import feign.FeignException.UnprocessableEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -38,7 +39,7 @@ public class NovaPropostaController {
     @Autowired
     private SolicitaAnalisePropostaClient analiseClient ;
 
-    @RolesAllowed({"user-admin" ,"user-basic"})
+
     @PostMapping
     public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester   , UriComponentsBuilder uri) {
         Proposta proposta = propostaRequester.toModel() ;
@@ -65,5 +66,8 @@ public class NovaPropostaController {
         }
     }
 
-
+    @GetMapping
+     public String sayHello(){
+     return  "Ola mundo!" ;
+    };
 }

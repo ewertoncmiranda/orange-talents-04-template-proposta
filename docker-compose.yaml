@@ -75,8 +75,9 @@ services:
       DB_USER: keycloak
       DB_PASSWORD: password
       KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: Pa55w0rd
+      KEYCLOAK_PASSWORD: 123
       POSTGRES_PORT_5432_TCP_ADDR: 127.0.0.1
+      TZ: America/Sao_Paulo
 
   analise:
     image: 'zupacademy/analise-financeira'
