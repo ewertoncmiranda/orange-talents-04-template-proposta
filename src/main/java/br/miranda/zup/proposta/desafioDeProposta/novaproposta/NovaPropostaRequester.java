@@ -26,7 +26,7 @@ public class NovaPropostaRequester {
         this.nome = nome ;
     }
 
-    private @ValidaCpfOuCnpj //@DocumentoUnicoPorProposta
+    private @ValidaCpfOuCnpj @DocumentoUnicoPorProposta
     @NotBlank String documento ;
 
     private @Email @NotBlank String email ;

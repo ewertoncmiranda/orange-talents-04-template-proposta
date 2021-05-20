@@ -1,21 +1,19 @@
 package br.miranda.zup.proposta.desafioDeProposta.atrelacartao;
 
 
-import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoRepositorio;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoResponse;
 import br.miranda.zup.proposta.desafioDeProposta.enumeration.StatusProposta;
 
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.PropostaRepositorio;
+import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SolicitaCartaoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Optional;
 

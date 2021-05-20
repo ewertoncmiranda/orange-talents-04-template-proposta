@@ -1,27 +1,25 @@
 package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
 
-import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitaAnalisePropostaClient;
+import br.miranda.zup.proposta.desafioDeProposta.atrelacartao.AssociarCartaoProposta;
+import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SolicitaAnalisePropostaClient;
 import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseRequest;
 import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseReponse;
-import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoResponse;
-import br.miranda.zup.proposta.desafioDeProposta.atrelacartao.NovoCartaoRequester;
-import br.miranda.zup.proposta.desafioDeProposta.atrelacartao.SolicitaCartaoClient;
+import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SolicitaCartaoClient;
 import br.miranda.zup.proposta.desafioDeProposta.enumeration.StatusProposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.PropostaRepositorio;
 import feign.FeignException.UnprocessableEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 @RequestMapping("/proposta")
 @RestController
@@ -39,6 +37,7 @@ public class NovaPropostaController {
     @Autowired
     private SolicitaAnalisePropostaClient analiseClient ;
 
+    private final Logger logger = LoggerFactory.getLogger(NovaPropostaController.class);
 
     @PostMapping
     public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester   , UriComponentsBuilder uri) {
@@ -54,14 +53,14 @@ public class NovaPropostaController {
     public Proposta analisaProposta(Proposta proposta){
         try {
             SolicitacaoAnaliseRequest solicitacaoAnaliseRequest = new SolicitacaoAnaliseRequest(proposta);
-
             SolicitacaoAnaliseReponse resultadoDaConsulta = analiseClient.busca(solicitacaoAnaliseRequest);
-
             proposta.setStatusProposta(resultadoDaConsulta.getResultadoSolicitacao().getStatusProposta());
+            logger.info("Documento da proposta ELEGIVEL");
             return proposta ;
 
         } catch (UnprocessableEntity e){
             proposta.setStatusProposta(StatusProposta.NAO_ELEGIVEL);
+            logger.info("Documento da proposta NAO ELEGIVEL");
             return proposta;
         }
     }

@@ -38,6 +38,7 @@ public class Proposta {
     @Enumerated(EnumType.STRING)
     private StatusProposta statusProposta;
 
+
     @OneToOne
     @JoinColumn(name = "cartao_id")
     private Cartao cartao;
@@ -45,7 +46,6 @@ public class Proposta {
     public void setStatusProposta(StatusProposta statusProposta) {
         this.statusProposta = statusProposta;
     }
-;
 
     public String getDocumento() {
         return documento;

@@ -1,5 +1,7 @@
-package br.miranda.zup.proposta.desafioDeProposta.analise;
+package br.miranda.zup.proposta.desafioDeProposta.sistemasexternos;
 
+import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseReponse;
+import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

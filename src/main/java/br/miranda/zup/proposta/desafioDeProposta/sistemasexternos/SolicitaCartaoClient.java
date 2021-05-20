@@ -1,5 +1,6 @@
-    package br.miranda.zup.proposta.desafioDeProposta.atrelacartao;
+    package br.miranda.zup.proposta.desafioDeProposta.sistemasexternos;
 
+import br.miranda.zup.proposta.desafioDeProposta.atrelacartao.NovoCartaoRequester;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.FeignClient;
