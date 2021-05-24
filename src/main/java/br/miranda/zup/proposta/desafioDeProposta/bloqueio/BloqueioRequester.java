@@ -12,7 +12,7 @@ public class BloqueioRequester {
     private String sistemaResponsavel;
 
     public BloqueioRequester() { }
-    
+
     public BloqueioRequester(String sistemaResponsavel) {
         this.sistemaResponsavel = sistemaResponsavel;
     }
