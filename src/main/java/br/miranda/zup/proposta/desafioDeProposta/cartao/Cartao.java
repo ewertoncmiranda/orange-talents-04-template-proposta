@@ -1,5 +1,6 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             package br.miranda.zup.proposta.desafioDeProposta.cartao;
 import br.miranda.zup.proposta.desafioDeProposta.bloqueio.Bloqueio;
+import br.miranda.zup.proposta.desafioDeProposta.novaviagem.Viagem;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,6 +13,8 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Cartao {
@@ -27,6 +30,11 @@ public class Cartao {
     @OneToOne
     @JoinColumn(name = "bloqueio_id")
     private Bloqueio bloqueio;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cartao_id")
+    private List<Viagem> viagem = new ArrayList<>();
+
 
     private String emitidoEm ;
     @Enumerated(EnumType.STRING)
