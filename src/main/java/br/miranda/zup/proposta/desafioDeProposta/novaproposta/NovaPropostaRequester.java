@@ -2,6 +2,7 @@ package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
 
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.validacao.DocumentoUnicoPorProposta;
+import br.miranda.zup.proposta.desafioDeProposta.validacao.EmailUnico;
 import br.miranda.zup.proposta.desafioDeProposta.validacao.ValidaCpfOuCnpj;
 
 import javax.validation.constraints.Email;
@@ -15,7 +16,7 @@ public class NovaPropostaRequester {
     }
 
     public NovaPropostaRequester(@NotBlank @ValidaCpfOuCnpj String documento,
-                                 @NotBlank @Email String email,
+                                 @NotBlank @Email @EmailUnico  String email,
                                  @NotBlank String endereco,
                                  @Positive @NotBlank BigDecimal salario,
                                  @NotBlank String nome ) {
@@ -29,7 +30,7 @@ public class NovaPropostaRequester {
     private @ValidaCpfOuCnpj @DocumentoUnicoPorProposta
     @NotBlank String documento ;
 
-    private @Email @NotBlank String email ;
+    private @Email @NotBlank @EmailUnico String email ;
 
     private @NotBlank String endereco ;
 

@@ -3,7 +3,7 @@ package br.miranda.zup.proposta.desafioDeProposta.bloqueio;
 
 import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoRepositorio;
-import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SolicitarBloqueioCartao;
+import br.miranda.zup.proposta.desafioDeProposta.tarefas.SolicitarBloqueioCartao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

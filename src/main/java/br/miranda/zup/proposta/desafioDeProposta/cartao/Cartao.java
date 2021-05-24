@@ -46,7 +46,7 @@ public class Cartao {
 
 
     public Cartao(String id, String emitidoEm, String titular,String limite ,Proposta proposta) {
-        this.numeroDoCartao = criptografaCartao(id);
+        this.numeroDoCartao = id;
         this.titular = titular;
         this.limite = new BigDecimal(limite);
         this.proposta = proposta;

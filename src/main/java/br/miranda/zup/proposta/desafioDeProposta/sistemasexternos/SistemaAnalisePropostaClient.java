@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(url = "http://localhost:9999" ,name = "solicitacao")
 @Component
-public interface SolicitaAnalisePropostaClient {
+public interface SistemaAnalisePropostaClient {
 
     @PostMapping("/api/solicitacao")
     public SolicitacaoAnaliseReponse busca(@RequestBody SolicitacaoAnaliseRequest request) ;

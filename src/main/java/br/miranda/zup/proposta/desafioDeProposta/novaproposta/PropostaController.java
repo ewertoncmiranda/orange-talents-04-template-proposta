@@ -1,6 +1,6 @@
 package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
 
-import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SolicitaAnalisePropostaClient;
+import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SistemaAnalisePropostaClient;
 import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseRequest;
 import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseReponse;
 import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SistemaExternoDeCartaoClient;
@@ -35,7 +35,7 @@ public class PropostaController {
     private EntityManager em ;
 
     @Autowired
-    private SolicitaAnalisePropostaClient analiseClient ;
+    private SistemaAnalisePropostaClient analiseClient ;
 
     private final Logger logger = LoggerFactory.getLogger(PropostaController.class);
 

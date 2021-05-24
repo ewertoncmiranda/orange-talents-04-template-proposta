@@ -1,10 +1,11 @@
-package br.miranda.zup.proposta.desafioDeProposta.sistemasexternos;
+package br.miranda.zup.proposta.desafioDeProposta.tarefas;
 
 import br.miranda.zup.proposta.desafioDeProposta.bloqueio.Bloqueio;
 import br.miranda.zup.proposta.desafioDeProposta.bloqueio.BloqueioRepositorio;
 import br.miranda.zup.proposta.desafioDeProposta.bloqueio.BloqueioRequester;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.StatusCartao;
+import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SistemaExternoDeCartaoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,10 @@ public class SolicitarBloqueioCartao {
     BloqueioRepositorio repositorio;
 
     public Cartao solicitarBloqueio( Cartao cartao, String ipUsuario , String agentUser){
-
         BloqueioRequester requester = new BloqueioRequester(agentUser);
 
         ResponseEntity response =
-             cartaoClient.solicitaBloqueioParaOcartao(cartao.getId().toString() , requester);
-
-
+             cartaoClient.solicitaBloqueioParaOcartao(cartao.getNumeroDoCartao() , requester);
        if(response.getStatusCode() == HttpStatus.OK){
            Bloqueio bloqueio = requester.toModel(ipUsuario,agentUser);
            cartao.setStatusCartao(StatusCartao.BLOQUEADO);

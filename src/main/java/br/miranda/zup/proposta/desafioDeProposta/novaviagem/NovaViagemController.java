@@ -3,6 +3,7 @@ package br.miranda.zup.proposta.desafioDeProposta.novaviagem;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoRepositorio;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.StatusCartao;
+import br.miranda.zup.proposta.desafioDeProposta.tarefas.SolicitaViagemCartao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +20,13 @@ public class NovaViagemController {
     private CartaoRepositorio repositorioCartao;
 
     @Autowired
+    private SolicitaViagemCartao solicitaViagemCartao;
+
+    @Autowired
     private  ViagemRepositorio viagemRepositorio;
 
     @PostMapping("/{idCartao}")
-    public ResponseEntity teste(@PathVariable("idCartao") Long idCartao,
+    public ResponseEntity solicitaViagem(@PathVariable("idCartao") Long idCartao,
                                 HttpServletRequest request,
                                 @RequestHeader ("User-Agent") String agentUser,
                                 @RequestBody @Valid NovaViagemRequester novaViagem){
@@ -30,10 +34,10 @@ public class NovaViagemController {
             Optional<Cartao> optCartao = repositorioCartao.findById(idCartao);
             if (optCartao.isPresent()){
                 if (optCartao.get().getStatusCartao() == StatusCartao.BLOQUEADO) {
-                  return ResponseEntity.unprocessableEntity().body("Cartoa Bloqueado! Não é possivel adicionar viagem.");
+                  return ResponseEntity.unprocessableEntity().body("Cartão Bloqueado! Não é possivel adicionar viagem.");
                 }else {
-                    Viagem viagem = novaViagem.toModel(request.getRemoteAddr(), agentUser, optCartao.get());
-                    viagemRepositorio.save(viagem);
+                    Cartao cartao = solicitaViagemCartao.solicitarViagem(optCartao.get(),novaViagem ,request.getRemoteAddr() ,agentUser);
+                    repositorioCartao.save(cartao);
                     return ResponseEntity.ok().build();
                 }
             }else {
