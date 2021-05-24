@@ -3,8 +3,7 @@ package br.miranda.zup.proposta.desafioDeProposta.bloqueio;
 
 import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoRepositorio;
-import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
-import feign.Response;
+import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SolicitarBloqueioCartao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,24 +27,26 @@ public class BloqueioController {
     @PersistenceContext
     EntityManager entityManager ;
 
+    SolicitarBloqueioCartao bloqueioCartao;
+
+    @Autowired
+    SolicitarBloqueioCartao solicitarBloqueioCartao;
+
     @PostMapping("/{id}")
     @Transactional
     public ResponseEntity solicitarBloqueio(@PathVariable Long id ,
                                             HttpServletRequest servletRequest,
-                                            @RequestHeader(value = "User-Agent") String userAgent){
+                                            @RequestHeader(value = "User-Agent") String userAgent ){
       Optional<Cartao> cartaoOptionl = cartaoRepositorio.findById(id) ;
-
           if(cartaoOptionl.isPresent()){
              Cartao cartao = cartaoOptionl.get();
                 if(cartao.estaBloqueado()) {
                     return ResponseEntity.unprocessableEntity().body("CARTAO JÁ ESTÁ BLOQUEADO!");
                 }else {
-                    BloqueioRequester bloqueioRequester = new BloqueioRequester(servletRequest.getRemoteUser().toString() , userAgent , cartao);
-                    Bloqueio bloqueio = bloqueioRequester.toModel();
-                    cartao.setBloqueio(bloqueioRepositorio.save(bloqueio));
-                    cartaoRepositorio.save(cartao);
-                    return  ResponseEntity.ok("Cartao bloqueado com sucesso.");
-                }
+                      cartao = solicitarBloqueioCartao.solicitarBloqueio(cartao,servletRequest.getLocalAddr(),userAgent);
+                      cartaoRepositorio.save(cartao);
+
+                    return ResponseEntity.ok().build();                }
           }else { return  ResponseEntity.notFound().build();}
     }
 

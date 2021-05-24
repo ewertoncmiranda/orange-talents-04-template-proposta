@@ -31,8 +31,8 @@ public class Cartao {
     private String emitidoEm ;
     @Enumerated(EnumType.STRING)
     public StatusCartao statusCartao = StatusCartao.ATIVO;
-    private String numeroDoCartao ;
 
+    private String numeroDoCartao ;
     private String titular ;
     private BigDecimal limite ;
 
@@ -47,7 +47,7 @@ public class Cartao {
 
     public boolean estaBloqueado(){
      if (this.getStatusCartao() == StatusCartao.BLOQUEADO) return true;
-        else return  false ;
+        else return false ;
     }
 
 

@@ -8,37 +8,20 @@ import javax.validation.constraints.NotNull;
 
 public class BloqueioRequester {
 
-    @NotBlank
-    private String enderecoIp ;
-    @NotBlank
-    private String agentUser ;
     @NotNull
-    private Cartao cartao ;
+    private String sistemaResponsavel;
 
-    public  BloqueioRequester(){};
-
-    public BloqueioRequester(  @NotBlank String enderecoIp ,
-                               @NotBlank String agentUser ,
-                               @NotNull Cartao cartao){
-        cartao.setStatusCartao(StatusCartao.BLOQUEADO);
-        this.cartao = cartao;
-        this.enderecoIp =enderecoIp;
-        this.agentUser = agentUser;
+    public BloqueioRequester() { }
+    
+    public BloqueioRequester(String sistemaResponsavel) {
+        this.sistemaResponsavel = sistemaResponsavel;
     }
 
-    public Bloqueio toModel(){
-        return  new Bloqueio(enderecoIp ,agentUser,cartao);
+    public String getSistemaResponsavel() {return sistemaResponsavel; }
+
+
+    public Bloqueio toModel(String ipUsuario , String agentUser ){
+      return new Bloqueio(ipUsuario,agentUser);
     }
 
-    public String getEnderecoIp() {
-        return enderecoIp;
-    }
-
-    public String getAgentUser() {
-        return agentUser;
-    }
-
-    public Cartao getCartao() {
-        return cartao;
-    }
 }

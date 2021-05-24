@@ -34,7 +34,6 @@ public class SolicitacaoAnaliseReponse {
 
     public Proposta toModel(EntityManager em) {
         Proposta proposta = em.find(Proposta.class , Long.parseLong(this.getIdProposta()));
-        //proposta.setStatusProposta(getResultadoSolicitacao());
         return proposta;
     }
 }

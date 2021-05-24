@@ -19,7 +19,6 @@ public class Bloqueio {
     @NotBlank
     private String agentUser ;
 
-
     @OneToOne(mappedBy = "bloqueio", fetch = FetchType.LAZY, orphanRemoval = false)
     private Cartao cartao;
     public Bloqueio(){};
@@ -28,11 +27,9 @@ public class Bloqueio {
     public LocalDateTime getBloqueadoEm() {return bloqueadoEm;  }
     public String getIpOrigemBloqueio() { return ipOrigemBloqueio;  }
     public String getAgentUser() { return agentUser;  }
-    public Cartao getCartao() { return cartao;  }
 
-    public Bloqueio(String ipOrigemBloqueio, String agentUser, Cartao cartao) {
+
+    public Bloqueio(String ipOrigemBloqueio, String agentUser) {
         this.ipOrigemBloqueio = ipOrigemBloqueio;
-        this.agentUser = agentUser;
-        this.cartao = cartao;
-    }
+        this.agentUser = agentUser;    }
 }

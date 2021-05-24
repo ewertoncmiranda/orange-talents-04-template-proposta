@@ -1,13 +1,13 @@
 package br.miranda.zup.proposta.desafioDeProposta.novaproposta;
 
-import br.miranda.zup.proposta.desafioDeProposta.atrelacartao.AssociarCartaoProposta;
 import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SolicitaAnalisePropostaClient;
 import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseRequest;
 import br.miranda.zup.proposta.desafioDeProposta.analise.SolicitacaoAnaliseReponse;
-import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SolicitaCartaoClient;
+import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SistemaExternoDeCartaoClient;
 import br.miranda.zup.proposta.desafioDeProposta.enumeration.StatusProposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.PropostaRepositorio;
+import br.miranda.zup.proposta.desafioDeProposta.tarefas.AnalisarProposta;
 import feign.FeignException.UnprocessableEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +23,13 @@ import java.net.URI;
 
 @RequestMapping("/proposta")
 @RestController
-public class NovaPropostaController {
+public class PropostaController {
 
     @Autowired
     private PropostaRepositorio repositorio ;
 
     @Autowired
-    private SolicitaCartaoClient solicitaCartaoClient;
+    private SistemaExternoDeCartaoClient sistemaExternoDeCartaoClient;
 
     @PersistenceContext
     private EntityManager em ;
@@ -37,15 +37,19 @@ public class NovaPropostaController {
     @Autowired
     private SolicitaAnalisePropostaClient analiseClient ;
 
-    private final Logger logger = LoggerFactory.getLogger(NovaPropostaController.class);
+    private final Logger logger = LoggerFactory.getLogger(PropostaController.class);
+
+    AnalisarProposta analisarProposta;
 
     @PostMapping
     public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester   , UriComponentsBuilder uri) {
         Proposta proposta = propostaRequester.toModel() ;
         repositorio.save(proposta) ;
-        Proposta props = analisaProposta(proposta);
-        Long id = repositorio.save(props).getId() ;
+        analisarProposta = new AnalisarProposta();
 
+        Proposta props = analisarProposta.analisarProposta(proposta,analiseClient);
+
+        Long id = repositorio.save(props).getId() ;
         URI returnUri = uri.path("/proposta/{id}").build(id);
         return ResponseEntity.created(returnUri).build();
     }

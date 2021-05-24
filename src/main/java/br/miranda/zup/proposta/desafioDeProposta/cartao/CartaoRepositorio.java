@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface CartaoRepositorio  extends CrudRepository<Cartao , Long> {
-
 }

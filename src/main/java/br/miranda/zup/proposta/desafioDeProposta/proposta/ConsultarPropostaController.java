@@ -19,16 +19,6 @@ public class ConsultarPropostaController {
     @Autowired
     PropostaRepositorio repositorio;
 
-    @GetMapping("/{id}")
-    public ResponseEntity consultarProposta(@PathVariable Long id){
 
-        Optional optional = repositorio.findById(id);
-        if (optional.isPresent()){
-            Proposta proposta =(Proposta) optional.get();
-            PropostaResponse response = new PropostaResponse(proposta);
-
-         return ResponseEntity.ok().body(new PropostaResponse(repositorio.findById(id).get()));
-        } return ResponseEntity.notFound().build();
-    }
 
 }
