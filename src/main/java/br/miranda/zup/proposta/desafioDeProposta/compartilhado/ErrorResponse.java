@@ -2,8 +2,8 @@ package br.miranda.zup.proposta.desafioDeProposta.compartilhado;
 
 public class ErrorResponse {
 
-    private String campo;
-    private String mensagem ;
+    private final String campo;
+    private final String mensagem ;
 
 
     public ErrorResponse(String campo, String mensagem) {

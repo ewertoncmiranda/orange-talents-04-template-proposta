@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface SistemaCriacaoDeCarteira {
 
     @PostMapping("/api/cartoes/{numeroCartao}/carteiras")
-    public ResponseEntity<CarteiraFeignResponse> associarCarteiraACartao(@RequestBody NovaCarteiraRequester novaCarteira,
-                                                                         @PathVariable String numeroCartao);
+    ResponseEntity<CarteiraFeignResponse> associarCarteiraACartao(@RequestBody NovaCarteiraRequester novaCarteira,
+                                                                  @PathVariable String numeroCartao);
 
 }

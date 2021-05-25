@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface SistemaExternoDeCartaoClient {
 
    @PostMapping("/api/cartoes")
-   public CartaoResponse solicitaCartaoParaAnalise(@RequestBody NovoCartaoRequester novoCartao);
+   CartaoResponse solicitaCartaoParaAnalise(@RequestBody NovoCartaoRequester novoCartao);
 
    @PostMapping(value = "/api/cartoes/{id}/bloqueios",consumes = "application/json")
-   public ResponseEntity solicitaBloqueioParaOcartao
-                  (@PathVariable String id ,
-                   @RequestBody BloqueioRequester bloqueioRequest) ;
+   ResponseEntity solicitaBloqueioParaOcartao
+           (@PathVariable String id,
+            @RequestBody BloqueioRequester bloqueioRequest) ;
 
 }

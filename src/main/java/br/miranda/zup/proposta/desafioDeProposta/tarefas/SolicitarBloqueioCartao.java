@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SolicitarBloqueioCartao {
 
-    public SolicitarBloqueioCartao(){};
+    public SolicitarBloqueioCartao(){}
 
     private final Logger logger = LoggerFactory.getLogger(SolicitarBloqueioCartao.class);
 

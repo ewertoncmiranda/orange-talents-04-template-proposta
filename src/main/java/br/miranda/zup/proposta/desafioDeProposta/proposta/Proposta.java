@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class Proposta {
 
     public Proposta(){
-    };
+    }
 
     public Proposta(@NotBlank @ValidaCpfOuCnpj String documento,
                     @NotBlank @Email String email,

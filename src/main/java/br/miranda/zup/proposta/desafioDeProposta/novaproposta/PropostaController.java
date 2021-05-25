@@ -42,7 +42,7 @@ public class PropostaController {
     AnalisarProposta analisarProposta;
 
     @PostMapping
-    public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester   , UriComponentsBuilder uri) {
+    public ResponseEntity<?> criarNovaProposta(@RequestBody @Valid NovaPropostaRequester propostaRequester, UriComponentsBuilder uri) {
         Proposta proposta = propostaRequester.toModel() ;
         repositorio.save(proposta) ;
         analisarProposta = new AnalisarProposta();
@@ -69,8 +69,5 @@ public class PropostaController {
         }
     }
 
-    @GetMapping
-     public String sayHello(){
-     return  "Ola mundo!" ;
-    };
+
 }

@@ -15,7 +15,6 @@ public class DocumentoUnicoPorPropostaValidator implements ConstraintValidator<D
     EntityManager em;
 
     @Override
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         Query query = em.createQuery
         ("SELECT 1 FROM "+ Proposta.class.getName() + " p WHERE p.documento = :valor");

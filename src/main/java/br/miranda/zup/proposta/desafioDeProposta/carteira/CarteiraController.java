@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RequestMapping("/carteira")
@@ -30,10 +31,11 @@ public class CarteiraController {
     @Autowired
     AdicionarCartaoACarteira adicionarCartaoACarteira;
 
-    @PostMapping("/paypal/{idCartao}")
-    public ResponseEntity criarNovaCarteira(@RequestBody NovaCarteiraRequester novaCarteira,
-                                            @PathVariable ("idCartao") Long idCartao,
-                                            UriComponentsBuilder uriComponentsBuilder){
+    @PostMapping("/{idCartao}")
+    public ResponseEntity criarNovaCarteira(@PathVariable ("idCartao") Long idCartao,
+                                            UriComponentsBuilder uriComponentsBuilder,
+                                            @RequestBody @Valid NovaCarteiraRequester novaCarteira){
+
         Optional<Cartao> optCartao = cartaoRepositorio.findById(idCartao);
         if(optCartao.isPresent()){
             ResponseEntity<Carteira> response = adicionarCartaoACarteira.adicionaCartao(novaCarteira,optCartao.get());

@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SolicitaViagemCartao {
 
-    public SolicitaViagemCartao(){};
+    public SolicitaViagemCartao(){}
+
     private final Logger logger = LoggerFactory.getLogger(SolicitaViagemCartao.class);
 
     @Autowired

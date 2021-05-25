@@ -36,8 +36,8 @@ public class AssociarCartaoProposta {
                         proposta.setCartao(cartaoRepositorio.save(cartaoResponse.toCartao(proposta)));
                         propostaRepositorio.save(proposta);
                         logger.warn("Cartão associado a proposta com sucesso.");
-                    };
-            };
+                    }
+            }
         }
 
     }

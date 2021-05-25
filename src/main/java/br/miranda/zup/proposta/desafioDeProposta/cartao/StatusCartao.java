@@ -1,5 +1,5 @@
 package br.miranda.zup.proposta.desafioDeProposta.cartao;
 
 public enum StatusCartao {
-    ATIVO , BLOQUEADO ;
+    ATIVO , BLOQUEADO
 }

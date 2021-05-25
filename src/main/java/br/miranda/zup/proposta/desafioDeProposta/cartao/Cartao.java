@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 public class Cartao {
 
-    public Cartao(){};
+    public Cartao(){}
 
     private String emitidoEm ;
     private String numeroDoCartao ;
@@ -40,7 +40,7 @@ public class Cartao {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cartao_id")
-    private List<Viagem> viagem = new ArrayList<>();
+    private final List<Viagem> viagem = new ArrayList<>();
 
     @OneToMany
     @JoinColumn(name = "cartao_id")
@@ -58,8 +58,7 @@ public class Cartao {
     }
 
     public boolean estaBloqueado(){
-     if (this.getStatusCartao() == StatusCartao.BLOQUEADO) return true;
-        else return false ;
+        return this.getStatusCartao() == StatusCartao.BLOQUEADO;
     }
 
 

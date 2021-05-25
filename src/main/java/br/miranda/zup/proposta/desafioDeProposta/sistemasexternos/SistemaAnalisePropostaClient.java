@@ -14,6 +14,6 @@ public interface
 SistemaAnalisePropostaClient {
 
     @PostMapping("/api/solicitacao")
-    public SolicitacaoAnaliseReponse busca(@RequestBody SolicitacaoAnaliseRequest request) ;
+    SolicitacaoAnaliseReponse busca(@RequestBody SolicitacaoAnaliseRequest request) ;
 
 }

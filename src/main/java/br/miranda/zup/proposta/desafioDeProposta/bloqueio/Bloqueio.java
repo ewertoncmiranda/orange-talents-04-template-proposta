@@ -21,7 +21,7 @@ public class Bloqueio {
 
     @OneToOne(mappedBy = "bloqueio", fetch = FetchType.LAZY, orphanRemoval = false)
     private Cartao cartao;
-    public Bloqueio(){};
+    public Bloqueio(){}
 
     public Long getId() {return id;}
     public LocalDateTime getBloqueadoEm() {return bloqueadoEm;  }

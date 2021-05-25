@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface SistemaSolicitacaoViagemClient {
 
     @PostMapping("/api/cartoes/{numeroDoCartao}/avisos")
-    public ResponseEntity solicitarViagem (@PathVariable("numeroDoCartao") String numeroDoCartao , @RequestBody NovaViagemRequester requester);
+    ResponseEntity solicitarViagem(@PathVariable("numeroDoCartao") String numeroDoCartao, @RequestBody NovaViagemRequester requester);
 }

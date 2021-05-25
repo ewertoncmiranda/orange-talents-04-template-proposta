@@ -7,9 +7,9 @@ import java.lang.annotation.*;
 @Documented
 @Target({ElementType.FIELD,ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {EmailUnicoValidador.class})
-public @interface EmailUnico {
-    String message() default "Já existe uma proposta com este email." ;
+@Constraint(validatedBy = CarteirasPermitidasValidador.class)
+public @interface CarteirasPermitidas {
+    String message() default "Carteiras SAMSUNG/PAYPAL permitidas!" ;
     Class<?> []groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

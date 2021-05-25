@@ -4,7 +4,7 @@ public enum StatusAnalise {
     COM_RESTRICAO(StatusProposta.NAO_ELEGIVEL) ,
     SEM_RESTRICAO(StatusProposta.ELEGIVEL) ;
 
-    private StatusProposta statusProposta;
+    private final StatusProposta statusProposta;
 
     public StatusProposta getStatusProposta(){
         return statusProposta;

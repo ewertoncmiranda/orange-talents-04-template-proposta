@@ -2,7 +2,7 @@ package br.miranda.zup.proposta.desafioDeProposta.carteira;
 
 public class CarteiraFeignResponse {
 
-    public CarteiraFeignResponse(){};
+    public CarteiraFeignResponse(){}
 
     private String id ;
 
