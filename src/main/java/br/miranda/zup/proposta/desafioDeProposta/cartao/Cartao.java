@@ -1,5 +1,6 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             package br.miranda.zup.proposta.desafioDeProposta.cartao;
 import br.miranda.zup.proposta.desafioDeProposta.bloqueio.Bloqueio;
+import br.miranda.zup.proposta.desafioDeProposta.carteira.Carteira;
 import br.miranda.zup.proposta.desafioDeProposta.novaviagem.Viagem;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import org.apache.tomcat.jni.Local;
@@ -20,6 +21,12 @@ import java.util.List;
 public class Cartao {
 
     public Cartao(){};
+
+    private String emitidoEm ;
+    private String numeroDoCartao ;
+    private String titular ;
+    private BigDecimal limite ;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id  ;
@@ -35,15 +42,12 @@ public class Cartao {
     @JoinColumn(name = "cartao_id")
     private List<Viagem> viagem = new ArrayList<>();
 
+    @OneToMany
+    @JoinColumn(name = "cartao_id")
+    List<Carteira> carteirasDisponiveis;
 
-    private String emitidoEm ;
     @Enumerated(EnumType.STRING)
     public StatusCartao statusCartao = StatusCartao.ATIVO;
-
-    private String numeroDoCartao ;
-    private String titular ;
-    private BigDecimal limite ;
-
 
     public Cartao(String id, String emitidoEm, String titular,String limite ,Proposta proposta) {
         this.numeroDoCartao = id;
