@@ -40,7 +40,7 @@ public class SolicitaViagemCartao {
            logger.info("Catch - Erro ao solicitar viagem para o cartão.");
            return cartao;
         }
-        return null;
+        return cartao;
     }
 
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(url = "http://localhost:8888/" ,name = "carteira")
 @Component
-public interface SistemaCriacaoDeCarteira {
+public interface SistemaCriacaoDeCarteiraClient {
 
     @PostMapping("/api/cartoes/{numeroCartao}/carteiras")
     ResponseEntity<CarteiraFeignResponse> associarCarteiraACartao(@RequestBody NovaCarteiraRequester novaCarteira,

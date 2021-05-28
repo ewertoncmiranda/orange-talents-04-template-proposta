@@ -2,9 +2,7 @@ package br.miranda.zup.proposta.desafioDeProposta.carteira;
 
 import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.CartaoRepositorio;
-import br.miranda.zup.proposta.desafioDeProposta.sistemasexternos.SistemaCriacaoDeCarteira;
 import br.miranda.zup.proposta.desafioDeProposta.tarefas.AdicionarCartaoACarteira;
-import feign.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
