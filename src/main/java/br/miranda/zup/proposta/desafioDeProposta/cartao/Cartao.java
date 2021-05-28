@@ -1,6 +1,7 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             package br.miranda.zup.proposta.desafioDeProposta.cartao;
 import br.miranda.zup.proposta.desafioDeProposta.bloqueio.Bloqueio;
 import br.miranda.zup.proposta.desafioDeProposta.carteira.Carteira;
+import br.miranda.zup.proposta.desafioDeProposta.criptografia.Criptographer;
 import br.miranda.zup.proposta.desafioDeProposta.novaviagem.Viagem;
 import br.miranda.zup.proposta.desafioDeProposta.proposta.Proposta;
 import org.apache.tomcat.jni.Local;
@@ -61,19 +62,6 @@ public class Cartao {
         return this.getStatusCartao() == StatusCartao.BLOQUEADO;
     }
 
-
-    private String criptografaCartao( String numeroDoCartao){
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-384");
-            messageDigest.update(numeroDoCartao.getBytes(),0,numeroDoCartao.length());
-            byte[] digest =  messageDigest.digest();
-            numeroDoCartao = new BigInteger(1,digest).toString(16);
-            return numeroDoCartao;
-        }catch (NoSuchAlgorithmException e){
-           e.printStackTrace();
-        }
-        return "ERRO NA CRIPTOGRAFIA DO CARTAO" ;
-    }
     public Long getId() {
         return id;
     }

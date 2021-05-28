@@ -1,5 +1,6 @@
 package br.miranda.zup.proposta.desafioDeProposta.proposta;
 
+import br.miranda.zup.proposta.desafioDeProposta.criptografia.Criptographer;
 import br.miranda.zup.proposta.desafioDeProposta.enumeration.StatusProposta;
 import br.miranda.zup.proposta.desafioDeProposta.cartao.Cartao;
 import br.miranda.zup.proposta.desafioDeProposta.validacao.ValidaCpfOuCnpj;
@@ -17,12 +18,13 @@ public class Proposta {
     public Proposta(){
     }
 
-    public Proposta(@NotBlank @ValidaCpfOuCnpj String documento,
+    public Proposta(@NotBlank String documento,
                     @NotBlank @Email String email,
                     @NotBlank String endereco,
                     @Positive @NotBlank BigDecimal salario,
                     @NotNull String nome) {
-        this.documento = documento;
+
+        this.documento = criptografar(documento);
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
@@ -30,13 +32,12 @@ public class Proposta {
     }
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id ;
-    private @ValidaCpfOuCnpj @NotBlank String documento ;
+    private @NotBlank String documento ;
     private @Email @NotBlank String email ;
     private @NotBlank String endereco ;
     private @NotNull String nome ;
     private @Positive BigDecimal salario;
-    @Enumerated(EnumType.STRING)
-    private StatusProposta statusProposta;
+    private  @Enumerated(EnumType.STRING)  StatusProposta statusProposta;
 
 
     @OneToOne
@@ -74,6 +75,11 @@ public class Proposta {
     }
 
     public void setCartao(Cartao cartao) { this.cartao = cartao;   }
+
+    private String criptografar(String docs){
+        Criptographer crip = new Criptographer();
+        return crip.criptografaGeral(docs);
+    }
 
     @Override
     public String toString() {
